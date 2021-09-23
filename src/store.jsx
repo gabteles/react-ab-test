@@ -1,8 +1,13 @@
 let store;
 
-const noopStore = {
-  getItem: function () {},
-  setItem: function () {},
+const memoryStore = {
+  values: {},
+  getItem: function (key) {
+    this.values[key];
+  },
+  setItem: function (key, value) {
+    this.values[key] = value;
+  },
 };
 
 if (typeof window !== 'undefined' && 'localStorage' in window) {
@@ -10,16 +15,16 @@ if (typeof window !== 'undefined' && 'localStorage' in window) {
     let key = '__pushtell_react__';
     window.localStorage.setItem(key, key);
     if (window.localStorage.getItem(key) !== key) {
-      store = noopStore;
+      store = memoryStore;
     } else {
       window.localStorage.removeItem(key);
       store = window.localStorage;
     }
   } catch (e) {
-    store = noopStore;
+    store = memoryStore;
   }
 } else {
-  store = noopStore;
+  store = memoryStore;
 }
 
 export default store;
