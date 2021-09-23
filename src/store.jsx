@@ -3,7 +3,7 @@ let store;
 const memoryStore = {
   values: {},
   getItem: function (key) {
-    this.values[key];
+    return this.values[key];
   },
   setItem: function (key, value) {
     this.values[key] = value;
